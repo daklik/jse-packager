@@ -1,4 +1,4 @@
-JSE-packager
+jse-packager
 ============
 
 Runtime packager for JSE classes.
