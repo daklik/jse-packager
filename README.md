@@ -2,7 +2,8 @@ JSE-packager
 ============
 
 Runtime packager for JSE classes.
-Can serve packed classes through classical external script, xhr and WebSockets.
+Can serve packed classes through classical HTTP GET, XHR and WebSockets.
+To be used alongside JSE (https://github.com/daklik/jse).
 
 Usage : node src/jse-packager.js --port 8080 "/directory/to/your/jse/classes" "/directory/to/your/other/jse/classes"
 
