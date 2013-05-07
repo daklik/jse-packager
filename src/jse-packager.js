@@ -18,6 +18,8 @@ for (var i=0; i < argv._.length; i++) {
 }
 startServer(argv.port || 8090);
 
+var verbose = argv.v;
+
 /*
     Loading JS classes into memory
  */
@@ -54,7 +56,9 @@ function loadFile(path) {
             result = ugly.minify(data, {fromString: true});
             var h = new hash("md5");
             h.update(result.code);
-            console.log("Caching package: " + jsePackage + " (uglified " + result.code.length + "/" + data.length + ")");
+            if (verbose) {
+                console.log("Caching package: " + jsePackage + " (uglified " + result.code.length + "/" + data.length + ")");
+            }
             var finalResult = [jsePackage, result.code + "JSE.extend(" + jsePackage + ", JSE.Object);", h.digest("hex"), path];
             cache[jsePackage] = finalResult;
         }
@@ -102,7 +106,7 @@ function startServer(port) {
             res.send(buildFinalResultLibrary(result, req.query));
         }
         else if (req.query.callback) {
-            //Service as JSONP response, obect oriented
+            //Service as JSONP response, object oriented
             res.jsonp(result);
         } else {
             //Default Service as Packaged JS Library
